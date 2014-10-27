@@ -1,0 +1,15 @@
+---
+- name: add the blog builder virtual server to nginx
+  template: src=blog-builder-nginx.conf dest=/etc/nginx/sites-enabled/ owner=www-data group=www-data mode=0644
+  sudo: yes
+  notify: restart nginx
+- name: copy the blog builder files
+  copy: src=jawher.me-builder_linux_amd64 dest=/usr/bin/  owner=root group=root mode=0755
+  sudo: yes
+- name: make blog-builder an upstart service
+  template: src=blog-builder.conf dest=/etc/init/ owner=root group=root mode=0644
+  sudo: yes
+  notify: reload services
+- name: start the blog builder service
+  service: name=blog-builder state=restarted enabled=yes
+  sudo: yes

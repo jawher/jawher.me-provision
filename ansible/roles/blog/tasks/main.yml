@@ -1,0 +1,38 @@
+---
+- name: install graphviz
+  apt: name=graphviz state=present
+  sudo: yes
+
+- name: create /var/www directory
+  file: path={{blog_dest}} state=directory mode=0770 group=www-data owner=www-data
+  sudo: yes
+
+- name: add the blog virtual server to nginx
+  template: src=blog.conf dest=/etc/nginx/sites-enabled/ owner=www-data group=www-data mode=0644
+  sudo: yes
+  notify: restart nginx
+
+- name: checkout the blog source from Github
+  git: repo=https://github.com/jawher/jawher.me.git dest={{blog_src}}
+  sudo: yes
+
+- name: install the required pip modules for the blog generator
+  pip: requirements={{blog_src}}/requirements.txt
+  sudo: yes
+
+- name: create Pelican's output folder
+  file: path={{blog_src}}/output state=directory mode=0644 group=www-data owner=www-data
+  sudo: yes
+
+- name: build the blog using Pelican
+  shell: make clean html 2> build.log chdir={{blog_src}}
+  sudo: yes
+
+- file: path={{blog_src}} state=directory mode=0770 group=www-data owner=www-data recurse=yes
+  sudo: yes
+
+- shell: cp -R {{blog_src}}/output/* /var/www/blog/
+  sudo: yes
+
+- file: path={{blog_dest}} state=directory mode=0770 group=www-data owner=www-data recurse=yes
+  sudo: yes

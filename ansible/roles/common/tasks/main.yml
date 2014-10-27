@@ -1,0 +1,9 @@
+---
+# - apt: upgrade=dist update_cache=yes
+#   sudo: yes
+- apt: name=nginx-full state=present
+  sudo: yes
+- apt: name=git state=present
+  sudo: yes
+- apt: name=python-pip state=present
+  sudo: yes

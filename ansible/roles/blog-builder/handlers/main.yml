@@ -1,0 +1,3 @@
+- name: reload services
+  action: command /sbin/initctl reload-configuration
+  sudo: yes

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - common
+    - blog
+    - blog-builder
