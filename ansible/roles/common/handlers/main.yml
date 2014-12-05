@@ -1,2 +1,5 @@
 - name: restart nginx
   service: name=nginx state=restarted
+- name: reload services
+  action: command /sbin/initctl reload-configuration
+  sudo: yes

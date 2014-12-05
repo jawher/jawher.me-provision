@@ -1,0 +1,35 @@
+body {
+	background: #e8e8e8;
+}
+h1 {
+	text-align: center;
+	background: #009688;
+	color: #fff;
+	margin: 0 0 1em 0;
+	padding: 10px;
+	border-bottom: 1px solid #00695c;
+}
+.content {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+table {
+	width: 100%;
+}
+table tbody {
+	font-family: monospace;
+	background: #fff;
+}
+
+.error {
+	background: #d50000;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.error p {
+
+}

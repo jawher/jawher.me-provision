@@ -1,6 +1,6 @@
 ---
-# - apt: upgrade=dist update_cache=yes
-#   sudo: yes
+- apt: upgrade=dist update_cache=yes
+  sudo: yes
 - apt: name=nginx-full state=present
   sudo: yes
 - apt: name=git state=present

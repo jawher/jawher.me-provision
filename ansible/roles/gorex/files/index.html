@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GoRex</title>
+
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+	<link rel="stylesheet" href="/gorex.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+	<script src="/gorex.js"></script>
+
+</head>
+<body ng-app="gorex" ng-controller="RexController">
+
+<h1>Gorex</h1>
+
+<div class="content">
+
+<div class="pure-g">
+    <div class="pure-u-1 error" ng-if="error">
+		{{error}}
+    </div>
+    <div class="pure-u-2-5">
+		<form class="pure-form pure-form-stacked">
+		    <fieldset>
+		        <label for="re">Regex</label>
+		        <input class="pure-u-4-5" id="re" type="text" placeholder="Regex..." 
+		        	ng-model="re" ng-change="rex()" ng-model-options="{debounce: 500}">
+
+		        <label for="inp">Text</label>
+		        <input class="pure-u-4-5" id="inp" type="text" placeholder="Text..." 
+		        	ng-model="input" ng-change="rex()" ng-model-options="{debounce: 500}">
+
+		        
+
+		        <button type="submit" class="pure-button pure-button-primary" ng-click="rex()">Rex it up !</button>
+		    </fieldset>
+		</form>
+	</div>
+
+	<div class="pure-u-3-5">
+	
+	<table class="pure-table pure-table-bordered">
+    <thead>
+        <tr>
+            <th>Func</th>
+            <th>Res</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="(k, v) in data">
+            <td>{{k}}</td>
+            <td>{{v}}</td>
+        </tr>
+        </tbody>
+    </table>
+	</div>
+</div>
+</div>
+</body>
+</html>
