@@ -15,24 +15,23 @@
 - name: checkout the blog source from Github
   git: repo=https://github.com/jawher/jawher.me.git dest={{blog_src}}
   sudo: yes
+  sudo_user: www-data
 
 - name: install the required pip modules for the blog generator
   pip: requirements={{blog_src}}/requirements.txt
   sudo: yes
 
 - name: create Pelican's output folder
-  file: path={{blog_src}}/output state=directory mode=0644 group=www-data owner=www-data
+  file: path={{blog_src}}/output state=directory
   sudo: yes
+  sudo_user: www-data
+
 
 - name: build the blog using Pelican
   shell: make clean html 2> build.log chdir={{blog_src}}
   sudo: yes
-
-- file: path={{blog_src}} state=directory mode=0770 group=www-data owner=www-data recurse=yes
-  sudo: yes
+  sudo_user: www-data
 
 - shell: cp -R {{blog_src}}/output/* /var/www/blog/
   sudo: yes
-
-- file: path={{blog_dest}} state=directory mode=0770 group=www-data owner=www-data recurse=yes
-  sudo: yes
+  sudo_user: www-data
