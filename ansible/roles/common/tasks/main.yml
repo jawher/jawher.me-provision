@@ -7,3 +7,14 @@
   sudo: yes
 - apt: name=python-pip state=present
   sudo: yes
+- name: Upload Key
+  copy:
+    content: "{{ private_ssl_key }}"
+    dest: /etc/ssl/private/jawher.me.key
+    mode: 0600
+  sudo: yes
+- name: Upload Cert
+  copy:
+    content: "{{ ssl_cert }}"
+    dest: /etc/ssl/certs/jawher.me.crt
+  sudo: yes

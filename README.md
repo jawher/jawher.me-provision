@@ -69,20 +69,20 @@ P.S.:
 To run this thing, you should execute:
 
 ```sh
-ansible-playbook playbook.yml -i <an-inventory-file>
+ansible-playbook playbook.yml -i <an-inventory-file> --ask-vault-pass
 ```
 
 where `<an-inventory-file>`  would look like:
 
 
 ```yaml
-<server-ip-or-host> ansible_ssh_user=<server-user> frontal_port=<frontal-nginx-port>    blog_url=<blog-url>    blog_src=<blog-clone-dir>    blog_dest=<blog-html-output>    blogb_url=<blog-builder-url>    blogb_loc=<blog-builder-location>    blogb_port=<blog-builder-local-port>    blogb_user=<blog-builder-login>    blogb_pwd=<blog-builder-login>
+<server-ip-or-host> ansible_ssh_user=<server-user> frontal_port=<frontal-nginx-port>    blog_url=<blog-url>    blog_src=<blog-clone-dir>    blog_dest=<blog-html-output>    blogb_url=<blog-builder-url>    blogb_loc=<blog-builder-location>    blogb_port=<blog-builder-local-port>    blogb_user=<blog-builder-login>    blogb_pwd=<blog-builder-login>  gorex_url=<gorex-url>   gorex_port=<gorex-local-port> gorex_dir=<gorex-static-files-location>
 ``` 
 
 For example:
 
 ```yaml
-jawher.me ansible_ssh_user=admin frontal_port=80    blog_url=jawher.me    blog_src=/var/www/jawher.me/    blog_dest=/var/www/blog    blogb_url=bb.jawher.me    blogb_loc=/build-blog    blogb_port=8080    blogb_user=jawher    blogb_pwd=nope
+jawher.me ansible_ssh_user=admin frontal_port=80    blog_url=jawher.me    blog_src=/var/www/jawher.me/    blog_dest=/var/www/blog    blogb_url=bb.jawher.me    blogb_loc=/build-blog    blogb_port=8080    blogb_user=jawher    blogb_pwd=nope  gorex_url=rex.jawher.me   gorex_port=8090 gorex_dir=/var/www/gorex/
 ```
 
 # License
