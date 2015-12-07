@@ -35,3 +35,13 @@
 - shell: cp -R {{blog_src}}/output/* /var/www/blog/
   sudo: yes
   sudo_user: www-data
+
+- name: obtain or renew the blog TLS certificate
+  command: /opt/letsencrypt/letsencrypt-auto --email "{{email}}" --agree-tos --renew-by-default certonly --webroot -w {{blog_dest}} -d {{blog_url}}
+  sudo: true
+  notify: restart nginx
+
+- name: add TLS cert renewal cron job
+  sudo: true
+  cron: name="{{blog_url}} TLS cert renew" special_time="monthly" user="root" job="/opt/letsencrypt/letsencrypt-auto --email "{{email}}" --agree-tos --renew-by-default certonly --webroot -w {{blog_dest}} -d {{blog_url}} && service nginx reload"
+

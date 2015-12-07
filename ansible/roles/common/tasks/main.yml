@@ -7,14 +7,9 @@
   sudo: yes
 - apt: name=python-pip state=present
   sudo: yes
-- name: Upload Key
-  copy:
-    content: "{{ private_ssl_key }}"
-    dest: /etc/ssl/private/jawher.me.key
-    mode: 0600
+- name: clone let's encrypt from Github
+  git: repo=https://github.com/letsencrypt/letsencrypt dest=/opt/letsencrypt/
   sudo: yes
-- name: Upload Cert
-  copy:
-    content: "{{ ssl_cert }}"
-    dest: /etc/ssl/certs/jawher.me.crt
+- name: ensure letencrypt is installed
+  command: /opt/letsencrypt/letsencrypt-auto --help
   sudo: yes
