@@ -1,0 +1,36 @@
+---
+- name: add the prbeers virtual server to nginx
+  template: src=prbeers-nginx.conf dest=/etc/nginx/sites-enabled/ owner=www-data group=www-data mode=0644
+  sudo: yes
+  notify: restart nginx
+
+- name: copy the prbeers exec
+  copy: src=prbeers_linux_amd64 dest=/usr/bin/  owner=root group=root mode=0755
+  sudo: yes
+
+- name: create the conf and data directory
+  file: path={{ item }} state=directory mode=0770 group=www-data owner=www-data
+  sudo: yes
+  with_items:
+  - "{{ prbeers_conf_dir }}"
+  - "{{ prbeers_storage_dir }}"
+
+- name: create the prbeers config file
+  template: src=prbeers.yml dest={{prbeers_conf_dir}} owner=www-data group=www-data mode=0644
+  sudo: yes
+
+- name: copy the prbeers static files
+  copy: src={{ item }} dest={{ prbeers_static_dir }} owner=www-data group=www-data mode=0644
+  sudo: yes
+  with_items:
+  - prbeers.css
+  - index.html.tpl
+
+- name: make prbeers an upstart service
+  template: src=prbeers.conf dest=/etc/init/ owner=root group=root mode=0644
+  sudo: yes
+  notify: reload services
+
+- name: start the prbeers service
+  service: name=prbeers state=restarted enabled=yes
+  sudo: yes

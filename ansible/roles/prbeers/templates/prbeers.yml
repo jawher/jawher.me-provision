@@ -1,0 +1,7 @@
+org: bazooka-ci
+users:
+  - jawher
+  - haklop
+  - julienvey
+token: {{prbeers_github_token}}
+max_delay: 7
