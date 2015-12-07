@@ -2,8 +2,7 @@
 <html>
 <head>
 	<title>GoRex</title>
-
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css">
 	<link rel="stylesheet" href="/gorex.css">
 
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
@@ -12,51 +11,37 @@
 </head>
 <body ng-app="gorex" ng-controller="RexController">
 
-<h1>Gorex</h1>
+<div class="header">
+	<h1>Gorex</h1>
 
-<div class="content">
-
-<div class="pure-g">
-    <div class="pure-u-1 error" ng-if="error">
+	<input id="re" type="text" placeholder="Regex..." 
+		        	ng-model="re" ng-change="rex()" ng-model-options="{debounce: 500}" ng-trim="false">
+</div>
+<div class="pure-u-1 error" ng-if="error">
 		{{error}}
     </div>
-    <div class="pure-u-2-5">
-		<form class="pure-form pure-form-stacked">
-		    <fieldset>
-		        <label for="re">Regex</label>
-		        <input class="pure-u-4-5" id="re" type="text" placeholder="Regex..." 
-		        	ng-model="re" ng-change="rex()" ng-model-options="{debounce: 500}">
-
-		        <label for="inp">Text</label>
-		        <input class="pure-u-4-5" id="inp" type="text" placeholder="Text..." 
-		        	ng-model="input" ng-change="rex()" ng-model-options="{debounce: 500}">
-
-		        
-
-		        <button type="submit" class="pure-button pure-button-primary" ng-click="rex()">Rex it up !</button>
-		    </fieldset>
-		</form>
-	</div>
-
-	<div class="pure-u-3-5">
-	
-	<table class="pure-table pure-table-bordered">
+	<table class="xpure-table xpure-table-bordered">
     <thead>
         <tr>
             <th>Func</th>
-            <th>Res</th>
+            <th ng-repeat="inp in inputs">
+            	<input type="text" placeholder="Text..." 
+		        	ng-model="inputs[$index].v" ng-change="rex()" ng-model-options="{debounce: 500}" ng-trim="false">
+		        <a class="del" ng-if="$index>0" href="" ng-click="delInput($index)">x</a>	
+            </th>
+            <th>
+            	<a href="" class="mega" ng-click="addInput()">+</a>
+            </th>
         </tr>
     </thead>
 
     <tbody>
-        <tr ng-repeat="(k, v) in data">
+        <tr ng-repeat="(k, vs) in data">
             <td>{{k}}</td>
-            <td>{{v}}</td>
+            <td ng-repeat="v in vs">{{v.V}}</td>
+            <td></td>
         </tr>
         </tbody>
     </table>
-	</div>
-</div>
-</div>
 </body>
 </html>

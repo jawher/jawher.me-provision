@@ -1,35 +1,122 @@
 body {
 	background: #e8e8e8;
 }
-h1 {
-	text-align: center;
+
+.header {
 	background: #009688;
-	color: #fff;
-	margin: 0 0 1em 0;
-	padding: 10px;
+	position: relative;
+	padding: 10px 210px 10px 210px;
+	margin: 0;
 	border-bottom: 1px solid #00695c;
-}
-.content {
-	max-width: 800px;
-	margin: 0 auto;
+	height: 40px;
 }
 
-table {
+.header h1 {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 200px;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	line-height: 40px;
+}
+
+.header input {
+	border: 1px solid #fff;
+	padding: 5px 10px;
+	line-height: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: monospace;
 	width: 100%;
 }
-table tbody {
-	font-family: monospace;
-	background: #fff;
-}
+
 
 .error {
-	background: #d50000;
+	background: #f44336;
 	color: #fff;
 	font-weight: bold;
 	text-align: center;
 	padding: 10px 0;
 }
 
-.error p {
 
+table {
+	width: 100%;
 }
+
+table thead tr th:first-of-type {
+	width: 210px;
+}
+
+table thead tr th:last-of-type {
+	width: 40px;
+	border-right: none;
+	padding: 0;
+}
+
+table thead th {
+	text-align: left;
+	padding: 5px 30px 5px 5px;
+	line-height: 20px;
+	border-right: 1px solid #fff;
+	position: relative;
+}
+
+table thead th input {
+	border: none;
+	display: block;
+	width: 100%;
+	line-height: 20px;
+}
+
+table thead th a.del {
+	width: 15px;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	bottom: 5px;
+	/*border-radius: 50%;*/
+	/*color: #d50000;*/
+	background: #f44336;
+}
+table thead th a.del:hover {
+	color: #f44336;
+	background: #fff;
+}
+
+table thead th a {
+	color: #fff;
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+table thead th a:hover {
+	background: #1e88e5;
+}
+
+table tbody {
+	font-family: monospace;
+	background: #fff;
+}
+
+table thead {
+	background: #2196f3;
+	color: #fff;
+}
+
+table td {
+	padding: 5px;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #eee;
+}
+
+
+
+.pure-button-primary {
+	background: #795548;
+} 
